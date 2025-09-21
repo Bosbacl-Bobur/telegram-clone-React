@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/user.js";
+import messageRoutes from "./routes/message.js";
 
 dotenv.config();
 
@@ -15,7 +17,10 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/message", messageRoutes);
 
+// Test route
 app.get("/", (req, res) => {
   res.send("Telegram Clone Backend 🚀");
 });
