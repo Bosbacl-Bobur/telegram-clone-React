@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { loginUser } from "../utils/api";
+import Alert from "../components/Alert";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [alert, setAlert] = useState(null); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -12,16 +14,14 @@ export default function Login() {
       const data = await loginUser({ email, password });
 
       if (data.token) {
-        alert("✅ Login successful!");
-        // Tokenni localStorage ga saqlash
+        setAlert({ type: "success", message: "✅ Login successful!" });
         localStorage.setItem("token", data.token);
-        // Keyin chat sahifaga yo‘naltirsa ham bo‘ladi
       } else {
-        alert("❌ " + data.message);
+        setAlert({ type: "error", message: data.message || "Login failed" });
       }
     } catch (error) {
       console.error(error);
-      alert("Server error");
+      setAlert({ type: "error", message: "Server error, please try again." });
     }
   };
 
@@ -32,6 +32,10 @@ export default function Login() {
         className="bg-white p-6 rounded-lg shadow-md w-80"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+
+        {/* 🔔 Alert chiqishi */}
+        {alert && <Alert type={alert.type} message={alert.message} />}
+
         <input
           type="email"
           placeholder="Email"
