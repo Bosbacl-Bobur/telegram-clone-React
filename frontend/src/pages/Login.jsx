@@ -11,7 +11,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await loginUser({ email, password });
+      const data = await loginUser({ email, password  });
 
       if (data.token) {
         setAlert({ type: "success", message: "✅ Login successful!" });
