@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import RegisterForm from "../components/RegisterForm";
-import { registerUser } from "../api";
+import { registerUser } from "../utils/api";
 
 export default function Register() {
   const handleRegister = async ({ username, email, password }) => {
