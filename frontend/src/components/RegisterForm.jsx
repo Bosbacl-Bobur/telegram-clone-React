@@ -24,13 +24,13 @@ export default function RegisterForm({ onRegister }) {
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
-        <input
+        <input 
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
+          
         />
         <input
           type="password"

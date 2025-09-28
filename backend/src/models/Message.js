@@ -4,12 +4,12 @@ const messageSchema = new mongoose.Schema(
   {
     sender: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // kim yubordi
+      ref: "User",
       required: true,
     },
     receiver: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // kimga yuborildi
+      ref: "User",
       required: true,
     },
     text: {
@@ -17,7 +17,7 @@ const messageSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true } // createdAt va updatedAt
+  { timestamps: true }
 );
 
 const Message = mongoose.model("Message", messageSchema);

@@ -1,56 +1,66 @@
 import User from "../models/User.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
-// 🔑 Register
+// Register controller
 export const register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
 
-    // agar user allaqachon bo‘lsa
+    // tekshir: user oldin ro‘yxatdan o‘tganmi?
     const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "User already exists" });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
 
     // parolni hash qilish
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // yangi user yaratish
     const newUser = new User({
+      username,
       email,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
     await newUser.save();
 
-    // token yaratish
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h"
-    });
-
-    res.status(201).json({ message: "User registered successfully", token });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.json({ message: "User registered successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
-// 🔑 Login (avvalgi kod)
+// Login controller
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // userni topish
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "User not found" });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
 
+    // parolni tekshirish
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid password" });
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
 
+    // token yaratish
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h"
+      expiresIn: "7d",
     });
 
-    res.json({ message: "Login successful", token });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.json({
+      message: "Login successful",
+      token,
+      user: { id: user._id, username: user.username, email: user.email },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };
