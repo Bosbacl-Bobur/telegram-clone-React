@@ -10,22 +10,43 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#0E1621] text-white">
+    <div className="relative flex items-center justify-center min-h-screen overflow-hidden text-white">
+      {/* 🔵 Harakatlanuvchi gradient fon */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#17212B] via-[#41638c] to-[#3e6294] animate-gradient bg-[length:400%_400%]" />
+
+      {/* 🔷 Login oynasi */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-[380px] bg-[#17212B] p-8 rounded-2xl shadow-lg"
+        className="relative z-10 w-[380px] bg-[#17212B]/90 p-8 rounded-2xl shadow-lg backdrop-blur-md"
       >
+        {/* Telegram logo */}
+        <div className="flex justify-center mb-6">
+          <motion.div
+            initial={{ rotate: -180, scale: 0 }}
+            animate={{ rotate: 0, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="w-16 h-16 bg-[#2AABEE] rounded-full flex items-center justify-center shadow-[0_0_25px_#2AABEE]"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 240 240"
+              className="w-9 h-9 fill-white"
+            >
+              <path d="M120,0C53.73,0,0,53.73,0,120s53.73,120,120,120,120-53.73,120-120S186.27,0,120,0ZM175.5,80.22l-18.88,89.14c-1.42,6.36-5.19,7.93-10.51,4.94l-29.06-21.4-14.02,13.5c-1.55,1.55-2.86,2.86-5.86,2.86l2.1-29.69,54.05-48.84c2.35-2.1-.51-3.27-3.63-1.22l-66.78,42.07-28.76-9c-6.25-1.95-6.36-6.25,1.3-9.25l112.39-43.33c5.19-1.95,9.73,1.22,8.02,9.02Z" />
+            </svg>
+          </motion.div>
+        </div>
+
         <h2 className="text-xl font-semibold text-center mb-4">
-          Ваш номер телефона
+          Введите ваш номер телефона
         </h2>
         <p className="text-gray-400 text-sm text-center mb-6">
-          Проверьте код страны и введите свой номер телефона.
+          Мы отправим вам код для входа в Telegram.
         </p>
 
         <form onSubmit={handleLogin} className="space-y-4">
-          {/* Country select */}
           <div>
             <label className="text-gray-300 text-sm">Страна</label>
             <select className="w-full mt-1 bg-[#0E1621] text-white border border-gray-600 rounded-md p-2 outline-none">
@@ -36,7 +57,6 @@ export default function Login() {
             </select>
           </div>
 
-          {/* Phone input */}
           <div>
             <label className="text-gray-300 text-sm">Номер телефона</label>
             <div className="flex items-center bg-[#0E1621] border border-gray-600 rounded-md px-3 py-2">
@@ -47,11 +67,11 @@ export default function Login() {
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="__ ___ __ __"
                 className="flex-1 bg-transparent outline-none text-white placeholder-gray-500"
+                required
               />
             </div>
           </div>
 
-          {/* Continue button */}
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
@@ -63,9 +83,28 @@ export default function Login() {
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-6">
+          Нет аккаунта?{" "}
+          <a href="/register" className="text-[#2AABEE] hover:underline">
+            Создать аккаунт
+          </a>
+        </p>
+
+        <p className="text-center text-sm text-gray-500 mt-3">
           Быстрый вход по QR-коду
         </p>
       </motion.div>
+
+      {/* 🔮 Gradient harakat animatsiyasi */}
+      <style>{`
+        @keyframes gradientMove {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+          animation: gradientMove 10s ease infinite;
+        }
+      `}</style>
     </div>
   );
 }
