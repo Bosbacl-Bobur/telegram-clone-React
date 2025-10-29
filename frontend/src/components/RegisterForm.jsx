@@ -32,7 +32,7 @@ export default function RegisterForm({ onRegister }) {
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           
         />
-         <input                                         {/*Если у вас будут СОР или СОЧ, можете написать мне на двоеной листочке. Или скажите учетиле. Что. Бабур напишет завтра. сфотографирует вопросы.     у меня есть причина. */}
+         <input                                         
           type="password"
           placeholder="Password"
           value={password}
@@ -50,3 +50,6 @@ export default function RegisterForm({ onRegister }) {
     </div>
   );
 }
+
+
+{/*Если у вас будут СОР или СОЧ, можете написать мне на двоеной листочке. Или скажите учетиле. Что. Бабур напишет завтра. сфотографирует вопросы.     у меня есть причина. */}
