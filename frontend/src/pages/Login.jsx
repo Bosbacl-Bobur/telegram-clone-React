@@ -1,68 +1,73 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { loginUser } from "../utils/api";
-import Alert from "../components/Alert";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [alert, setAlert] = useState(null); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await loginUser({ email, password  });
+      const data = await loginUser({ email, password });
 
       if (data.token) {
-        setAlert({ type: "success", message: "✅ Login successful!" });
+        alert("✅ Login successful!");
         localStorage.setItem("token", data.token);
       } else {
-        setAlert({ type: "error", message: data.message || "Login failed" });
+        alert("❌ " + data.message);
       }
     } catch (error) {
       console.error(error);
-      setAlert({ type: "error", message: "Server error, please try again." });
+      alert("Server error");
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleLogin}
-        className="bg-white p-6 rounded-lg shadow-md w-80"
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-400 to-blue-700">
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="bg-white/20 backdrop-blur-md shadow-xl rounded-2xl p-8 w-96 border border-white/30"
       >
-        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+        <h2 className="text-3xl font-bold text-center text-white mb-6">
+          Telegram Clone
+        </h2>
 
-        {/* 🔔 Alert chiqishi */}
-        {alert && <Alert type={alert.type} message={alert.message} />}
+        <form onSubmit={handleLogin} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="input input-bordered w-full bg-white/80 text-gray-800"
+          />
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2 mb-3 border rounded"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-3 py-2 mb-3 border rounded"
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-        >
-          Login
-        </button>
-      </form>
-      <p className="mt-4 text-gray-600">
-        Don’t have an account?{" "}
-        <Link to="/register" className="text-blue-600 hover:underline">
-          Register here
-        </Link>
-      </p>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input input-bordered w-full bg-white/80 text-gray-800"
+          />
+
+          <button
+            type="submit"
+            className="btn btn-primary w-full rounded-full mt-2"
+          >
+            Login
+          </button>
+        </form>
+
+        <p className="text-center text-white mt-4">
+          Don’t have an account?{" "}
+          <Link to="/register" className="text-yellow-200 hover:underline">
+            Register
+          </Link>
+        </p>
+      </motion.div>
     </div>
   );
 }
