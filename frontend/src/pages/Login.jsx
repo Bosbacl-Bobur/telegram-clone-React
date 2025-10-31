@@ -1,31 +1,34 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import LoginForm from "../components/LoginForm";
 
 export default function Login() {
-  const [phone, setPhone] = useState("");
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    alert(`Telefon raqamingiz: ${phone}`);
-  };
-
   return (
     <div className="relative flex items-center bg-gradient-to-b from-[#0E1621] to-[#1B2838] justify-center min-h-screen overflow-hidden text-white">
       <div className="space">
+    {Array.from({ length: 300 }).map((_, i) => (
+  <div
+    key={i}
+    className="star"
+    style={{
+      left: `${Math.random() * 100}vw`,
+      top: `${Math.random() * 100}vh`,
+      animationDuration: `${2 + Math.random() * 5}s`,
+      animationDelay: `${Math.random() * 5}s`,
+    }}
+  ></div>
+))}
 
-      </div>
+  </div>
       {/* 🔵 Harakatlanuvchi gradient fon */}
-      <div className="absolute  inset-0  from-[#17212B] via-[#000000] to-[#408cff] animate-gradient" />
+      <div className="absolute inset-0 from-[#17212B] via-[#000000] to-[#408cff] animate-gradient" />
 
       {/* 🔷 Login oynasi */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
-        
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="relative z-10 w-[380px] bg-[#17212B]/90 p-8 rounded-2xl shadow-lg backdrop-blur-md"
       >
-        {/* Telegram logo */}
         <div className="flex justify-center mb-6">
           <motion.div
             initial={{ rotate: -180, scale: 0 }}
@@ -50,41 +53,8 @@ export default function Login() {
           Мы отправим вам код для входа в Telegram.
         </p>
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="text-gray-300 text-sm">Страна</label>
-            <select className="w-full mt-1 bg-[#0E1621] text-white border border-gray-600 rounded-md p-2 outline-none">
-              <option>Uzbekistan</option>
-              <option>Russia</option>
-              <option>Kazakhstan</option>
-              <option>USA</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="text-gray-300 text-sm">Номер телефона</label>
-            <div className="flex items-center bg-[#0E1621] border border-gray-600 rounded-md px-3 py-2">
-              <span className="text-gray-400 mr-2">+998</span>
-              <input
-                type="text"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="__ ___ __ __"
-                className="flex-1 bg-transparent outline-none text-white placeholder-gray-500"
-                required
-              />
-            </div>
-          </div>
-
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            type="submit"
-            className="w-full bg-[#2AABEE] hover:bg-[#229ED9] text-white font-medium py-2 rounded-md mt-4"
-          >
-            Продолжить
-          </motion.button>
-        </form>
+        {/* ⬇️ Bu yerda formani import qilib ishlatamiz */}
+        <LoginForm />
 
         <p className="text-center text-sm text-gray-500 mt-6">
           Нет аккаунта?{" "}
@@ -92,13 +62,9 @@ export default function Login() {
             Создать аккаунт
           </a>
         </p>
-
-        <p className="text-center text-sm text-gray-500 mt-3">
-          Быстрый вход по QR-коду
-        </p>
       </motion.div>
 
-      {/* 🔮 Gradient harakat animatsiyasi */}
+      {/* 🔮 Gradient animatsiya */}
       <style>{`
         @keyframes gradientMove {
           0% { background-position: 0% 50%; }
