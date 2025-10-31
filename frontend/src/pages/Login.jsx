@@ -10,13 +10,17 @@ export default function Login() {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen overflow-hidden text-white">
+    <div className="relative flex items-center bg-gradient-to-b from-[#0E1621] to-[#1B2838] justify-center min-h-screen overflow-hidden text-white">
+      <div className="space">
+
+      </div>
       {/* 🔵 Harakatlanuvchi gradient fon */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#17212B] via-[#41638c] to-[#3e6294] animate-gradient bg-[length:400%_400%]" />
+      <div className="absolute  inset-0  from-[#17212B] via-[#000000] to-[#408cff] animate-gradient" />
 
       {/* 🔷 Login oynasi */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
+        
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="relative z-10 w-[380px] bg-[#17212B]/90 p-8 rounded-2xl shadow-lg backdrop-blur-md"

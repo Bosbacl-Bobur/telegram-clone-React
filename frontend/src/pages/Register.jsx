@@ -15,27 +15,24 @@ export default function Register() {
     alert(`Yangi akkaunt: ${formData.firstName} ${formData.lastName} - ${formData.phone}`);
   };
 
-  return (
+  return ( 
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-[#0E1621] to-[#1B2838] text-white">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-[380px] bg-[#17212B]/90 backdrop-blur-lg p-8 rounded-2xl shadow-2xl"
-      >
+        className="w-[380px] bg-[#17212B]/90 backdrop-blur-lg p-8 rounded-2xl shadow-2xl" >
         {/* 🟢 Yangi Telegram logo */}
         <div className="flex justify-center mb-6">
           <motion.div
             initial={{ rotate: -180, scale: 0 }}
             animate={{ rotate: 0, scale: 1 }}
-            transition={{ duration: 0.7 }}
-            className="w-20 h-20 bg-gradient-to-tr from-[#2AABEE] to-[#229ED9] rounded-full flex items-center justify-center shadow-lg shadow-[#2AABEE]/40"
-          >
+            transition={{ duration: 1.1  }}
+            className="w-20 h-20 bg-gradient-to-tr from-[#2AABEE] to-[#229ED9] rounded-full flex items-center justify-center shadow-lg shadow-[#2AABEE]/40">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 240 240"
-              className="w-10 h-10 fill-white"
-            >
+              className="w-10 h-10 fill-white">
               <path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm58.7 81.7l-20 94.3c-1.5 6.8-5.5 8.5-11 5.3l-30.4-22.4-14.7 14.1c-1.6 1.6-3 3-6.1 3l2.2-31.8 57.9-52.3c2.5-2.2-0.5-3.4-3.9-1.3l-71.7 45.1-30.9-9.7c-6.7-2.1-6.8-6.7 1.5-9.9l120.7-46.6c5.6-2 10.5 1.3 8.7 9.6z" />
             </svg>
           </motion.div>
@@ -46,8 +43,7 @@ export default function Register() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-2xl font-semibold text-center mb-4"
-        >
+          className="text-2xl font-semibold text-center mb-4">
           Создать аккаунт Telegram
         </motion.h2>
 
@@ -67,8 +63,7 @@ export default function Register() {
               }
               placeholder="Введите имя"
               className="w-full mt-1 bg-[#0E1621] text-white border border-gray-600 rounded-md p-2 outline-none placeholder-gray-500"
-              required
-            />
+              required />
           </div>
 
           <div>
