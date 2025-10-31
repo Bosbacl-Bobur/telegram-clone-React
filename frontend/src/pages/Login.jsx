@@ -5,7 +5,7 @@ export default function Login() {
   return (
     <div className="relative flex items-center bg-gradient-to-b from-[#0E1621] to-[#1B2838] justify-center min-h-screen overflow-hidden text-white">
       <div className="space">
-    {Array.from({ length: 300 }).map((_, i) => (
+    {Array.from({ length: 250 }).map((_, i) => (
   <div
     key={i}
     className="star"
