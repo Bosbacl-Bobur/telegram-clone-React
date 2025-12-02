@@ -8,18 +8,17 @@ export default function LoginForm() {
     alert(`Telefon raqamingiz: ${phone}`);
   };
 
-  return (
+  return (l
     <form onSubmit={handleLogin} className="space-y-4">
       <div>
         <label className="text-gray-300 text-sm">Страна</label>
-        <select className="w-full mt-1 bg-[#0E1621] text-white border border-gray-600 rounded-md p-2 outline-none">
+        <select className="w-full mt-1 bg-[#0E1621] text-white border border-gray-600 rounded-md p-2  outline-none">
           <option>Uzbekistan</option>
           <option>Russia</option>
           <option>Kazakhstan</option>
           <option>USA</option>
         </select>
       </div>
-
       <div>
         <label className="text-gray-300 text-sm">Номер телефона</label>
         <div className="flex items-center bg-[#0E1621] border border-gray-600 rounded-md px-3 py-2">
@@ -30,17 +29,15 @@ export default function LoginForm() {
             onChange={(e) => setPhone(e.target.value)}
             placeholder="__ ___ __ __"
             className="flex-1 bg-transparent outline-none text-white placeholder-gray-500"
-            required
-          />
+            required />
         </div>
       </div>
 
-      <button
+      <button 
         type="submit"
-        className="w-full bg-[#2AABEE] hover:bg-[#229ED9] text-white font-medium py-2 rounded-md mt-4"
-      >
-        Продолжить
-      </button>
+        className="w-full bg-[#2AABEE] hover:bg-[#229ED9] text-white font-medium py-2 rounded-md mt-4" >
+        Продолжить 
+      </button> 
     </form>
   );
 }
